@@ -9,3 +9,15 @@ body{
     float: right;
     margin-bottom: 15px;
 }
+.img{
+    width: 40px;
+    height: 40px;
+}
+.desc{
+    font-size: xx-small;
+    color: #b7b5b5;
+}
+
+.setion{
+    margin-top: 25px;
+}

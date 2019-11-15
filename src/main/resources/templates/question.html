@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>码匠社区</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:replace="navigation :: nav"></div>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" id="desc">
+            <h4 th:text="${question.title}"></h4>
+            <span class="desc">
+                作者：<span th:text="${question.user.name}"></span> |
+                发布时间：<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd')}"></span> |
+                阅读数：<span th:text="${question.viewCount}"></span>
+            </span>
+            <hr>
+            <div>
+                <span th:text="${question.description}"></span>
+            </div>
+            <hr>
+            <a><span class="glyphicon glyphicon-pencil">编辑</span></a>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h4>发起人</h4>
+            <div class="media">
+                <div class="media-left">
+                    <img class="img media-object img-circle" th:src="${question.user.avatarUrl}" alt="...">
+                </div>
+                <div class="media-body">
+                    <h6 class="media-heading" th:text="${question.user.name}"></h6>
+                </div>
+            </div>
+            <hr>
+            <h4>热门话题</h4>
+        </div>
+    </div>
+</div>
+</body>
+</html>

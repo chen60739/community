@@ -3,11 +3,11 @@
 <head>
     <title>码匠社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/community.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div th:replace="navigation :: nav"></div>
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" id="desc">
             <h2>
-                <span class="glyphicon glyphicon-list" aria-hidden="true">发现</span>
+                <span aria-hidden="true" th:text="${title}"></span>
             </h2>
             <hr>
             <!--<div class="media" th:each="question:${questions}">
@@ -33,7 +33,13 @@
             </div>-->
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>热门话题</h3>
+            <div class="list-group setion">
+                <a href="/profile/question" th:class="${setion=='question'}? 'list-group-item active':'list-group-item'">我的问题</a>
+                <a href="/profile/replie" th:class="${setion=='replie'}? 'list-group-item active':'list-group-item'">
+                    最新回复
+                    <span class="badge">14</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -64,7 +70,7 @@
     });
 
     function search(currentPage) {
-        $.getJSON("/getData",{"currentPage":currentPage}, function (result) {
+        $.getJSON("/profile/getData",{"currentPage":currentPage}, function (result) {
             $("#qian").empty();
             showData(result.data);
             if (currentPage != 1) {
@@ -94,7 +100,7 @@
                 "                    </a>\n" +
                 "                </div>\n" +
                 "                <div class=\"media-body\">\n" +
-                "                    <a href='/question/"+n.id+"'><h4 class=\"media-heading\">"+n.title+"</h4></a>" +
+                "                    <h4 class=\"media-heading\">"+n.title+"</h4>\n" +
                 "                    <span>"+n.description+"</span>\n" +
                 "                    <br>\n" +
                 "                    <span class=\"desc\"><span>"+n.commentCount+"</span>个回复 · <span>"+n.viewCount+"</span>次浏览 · 发表于<span th:text=\"${#dates.format("+n.gmtCreate+",'yyyy-MM-dd')}\"></span></span>\n" +
